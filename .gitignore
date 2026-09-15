@@ -1,0 +1,31 @@
+# Keil uVision build outputs
+KEIL/obj/
+KEIL/lst/
+*.dep
+*.hex
+*.axf
+*.map
+
+# Keil per-user / per-machine IDE state (not shareable)
+*.uvgui
+*.uvgui.*
+*.uvguix.*
+*.uvgui_user.bak
+
+# Backup / editor temp files
+*.bak
+*~
+*.tmp
+
+# Office lock files (created while a file is open)
+~$*
+
+# Windows folder metadata
+desktop.ini
+
+# OS junk
+Thumbs.db
+.DS_Store
+
+# Oversized raw capture (>100MB, exceeds GitHub's per-file limit) - kept locally only
+wave/analog.csv

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sound Library Demo</title>
+  <style>
+    :root {
+      --bg1: #08111d;
+      --bg2: #101827;
+      --panel: rgba(17, 24, 39, 0.95);
+      --panel2: rgba(23, 36, 58, 0.96);
+      --line: rgba(148, 163, 184, 0.18);
+      --text: #edf4ff;
+      --muted: #b8c7dc;
+      --primary: #60a5fa;
+      --primary2: #2563eb;
+      --accent: #7ef0d6;
+      --shadow: 0 20px 40px rgba(0,0,0,0.28);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: "Segoe UI", "Malgun Gothic", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(96,165,250,0.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(126,240,214,0.12), transparent 20%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      color: var(--text);
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 28px 16px;
+    }
+
+    .app {
+      width: min(1200px, 100%);
+      background: rgba(17, 24, 39, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .topbar {
+      padding: 26px 28px 20px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: rgba(15, 23, 42, 0.72);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 2.7rem);
+      letter-spacing: -0.05em;
+    }
+
+    .badge {
+      border: 1px solid rgba(96,165,250,0.35);
+      background: rgba(96,165,250,0.08);
+      color: #dcecff;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .content {
+      padding: 26px 28px 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--panel2), rgba(17,24,39,0.96));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(96,165,250,0.45);
+    }
+
+    .code {
+      color: #cfe6ff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+
+    .name {
+      font-size: 1.18rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .path {
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      min-height: 42px;
+      word-break: break-word;
+    }
+
+    .play {
+      margin-top: auto;
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-weight: 700;
+      font-size: 0.94rem;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      color: white;
+      transition: filter 0.2s ease, transform 0.2s ease;
+    }
+
+    .play:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 640px) {
+      .topbar, .content {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <h1>Sound Library</h1>
+      <div class="badge">AUDIO / SOUND MAP</div>
+    </div>
+
+    <div class="content">
+      <div class="grid">
+        <div class="card">
+          <div class="code">SS_Mode1_WakeUp</div>
+          <div class="name">Wake Up</div>
+          <div class="path">AUDIO/Mode1_WakeUp.wav</div>
+          <button class="play" onclick="playSound('SS_Mode1_WakeUp')">재생</button>
+        </div>
+
+        <div class="card">
+          <div class="code">SS_Mode1_Beep</div>
+          <div class="name">Mode1 Beep</div>
+          <div class="path">AUDIO/Mode1_Beep.wav</div>
+          <button class="play" onclick="playSound('SS_Mode1_Beep')">재생</button>
+        </div>
+
+        <div class="card">
+          <div class="code">SS_Mode2_LiftStage</div>
+          <div class="name">Lift Stage</div>
+          <div class="path">AUDIO/Mode2_LiftStage.wav</div>
+          <button class="play" onclick="playSound('SS_Mode2_LiftStage')">재생</button>
+        </div>
+
+        <div class="card">
+          <div class="code">SS_Mode2_Beep</div>
+          <div class="name">Mode2 Beep</div>
+          <div class="path">AUDIO/Mode2_Beep.wav</div>
+          <button class="play" onclick="playSound('SS_Mode2_Beep')">재생</button>
+        </div>
+
+        <div class="card">
+          <div class="code">SS_Mode3_Infuse</div>
+          <div class="name">Infuse</div>
+          <div class="path">AUDIO/Mode3_Infuse.wav</div>
+          <button class="play" onclick="playSound('SS_Mode3_Infuse')">재생</button>
+        </div>
+
+        <div class="card">
+          <div class="code">SS_Mode3_Beep</div>
+          <div class="name">Mode3 Beep</div>
+          <div class="path">AUDIO/Mode3_Beep.wav</div>
+          <button class="play" onclick="playSound('SS_Mode3_Beep')">재생</button>
+        </div>
+
+        <div class="card">
+          <div class="code">SS_VolumeHigh</div>
+          <div class="name">Volume High</div>
+          <div class="path">AUDIO/VolumeHigh.wav</div>
+          <button class="play" onclick="playSound('SS_VolumeHigh')">재생</button>
+        </div>
+
+        <div class="card">
+          <div class="code">SS_VolumeMid</div>
+          <div class="name">Volume Mid</div>
+          <div class="path">AUDIO/VolumeMid.wav</div>
+          <button class="play" onclick="playSound('SS_VolumeMid')">재생</button>
+        </div>
+
+        <div class="card">
+          <div class="code">SS_VolumeLow</div>
+          <div class="name">Volume Low</div>
+          <div class="path">AUDIO/VolumeLow.wav</div>
+          <button class="play" onclick="playSound('SS_VolumeLow')">재생</button>
+        </div>
+
+        <div class="card">
+          <div class="code">SS_LowBat</div>
+          <div class="name">Low Battery</div>
+          <div class="path">AUDIO/LowBat.wav</div>
+          <button class="play" onclick="playSound('SS_LowBat')">재생</button>
+        </div>
+
+        <div class="card">
+          <div class="code">SS_LEVEL0</div>
+          <div class="name">Level 0</div>
+          <div class="path">AUDIO/Level0.wav</div>
+          <button class="play" onclick="playSound('SS_LEVEL0')">재생</button>
+        </div>
+
+        <div class="card">
+          <div class="code">SS_LEVEL1</div>
+          <div class="name">Level 1</div>
+          <div class="path">AUDIO/Level1.wav</div>
+          <button class="play" onclick="playSound('SS_LEVEL1')">재생</button>
+        </div>
+
+        <div class="card">
+          <div class="code">SS_LEVEL2</div>
+          <div class="name">Level 2</div>
+          <div class="path">AUDIO/Level2.wav</div>
+          <button class="play" onclick="playSound('SS_LEVEL2')">재생</button>
+        </div>
+
+        <div class="card">
+          <div class="code">SS_PowerOff</div>
+          <div class="name">Power Off</div>
+          <div class="path">AUDIO/PowerOff.wav</div>
+          <button class="play" onclick="playSound('SS_PowerOff')">재생</button>
+        </div>
+      </div>
+
+      <div class="footer">
+        사운드 코드와 실제 오디오 파일 경로를 매핑해 보여주는 데모 페이지입니다.<br />
+        브라우저에서 직접 열어 확인할 수 있고, 음원 파일만 AUDIO 폴더에 맞춰 넣으면 바로 사용 가능합니다.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const soundMap = {
+      SS_Mode1_WakeUp: "AUDIO/Mode1_WakeUp.wav",
+      SS_Mode1_Beep: "AUDIO/Mode1_Beep.wav",
+      SS_Mode2_LiftStage: "AUDIO/Mode2_LiftStage.wav",
+      SS_Mode2_Beep: "AUDIO/Mode2_Beep.wav",
+      SS_Mode3_Infuse: "AUDIO/Mode3_Infuse.wav",
+      SS_Mode3_Beep: "AUDIO/Mode3_Beep.wav",
+      SS_VolumeHigh: "AUDIO/VolumeHigh.wav",
+      SS_VolumeMid: "AUDIO/VolumeMid.wav",
+      SS_VolumeLow: "AUDIO/VolumeLow.wav",
+      SS_LowBat: "AUDIO/LowBat.wav",
+      SS_LEVEL0: "AUDIO/Level0.wav",
+      SS_LEVEL1: "AUDIO/Level1.wav",
+      SS_LEVEL2: "AUDIO/Level2.wav",
+      SS_PowerOff: "AUDIO/PowerOff.wav"
+    };
+
+    const audioPool = new Map();
+
+    function getAudio(code) {
+      if (!audioPool.has(code)) {
+        const audio = new Audio(soundMap[code]);
+        audio.preload = "auto";
+        audioPool.set(code, audio);
+      }
+      return audioPool.get(code);
+    }
+
+    function playSound(code) {
+      const path = soundMap[code];
+      if (!path) return;
+
+      const audio = getAudio(code);
+      audio.currentTime = 0;
+      audio.play().catch(() => {
+        console.log("클릭 후 재생이 허용됩니다.");
+      });
+    }
+  </script>
+</body>
+</html>

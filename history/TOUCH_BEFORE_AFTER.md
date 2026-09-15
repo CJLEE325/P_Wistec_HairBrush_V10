@@ -4,7 +4,7 @@
 
 ---
 
-## 1. 소프트웨어 — `task_MotorCtrl()` ([main.c:1716](main.c#L1716))
+## 1. 소프트웨어 — `task_MotorCtrl()` ([main.c:1716](../main.c#L1716))
 
 | 항목 | Before (최초 발견 시) | Now (현재) |
 |---|---|---|

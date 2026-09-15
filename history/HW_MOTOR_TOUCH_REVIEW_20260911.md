@@ -47,7 +47,7 @@
 
 ---
 
-## 2. `task_MotorCtrl()` 코드 검토 및 수정 ([main.c:1716](main.c#L1716))
+## 2. `task_MotorCtrl()` 코드 검토 및 수정 ([main.c:1716](../main.c#L1716))
 
 ### 2-1. 오늘 발견/수정한 버그
 
